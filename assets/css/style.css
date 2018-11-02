@@ -1,0 +1,10 @@
+body {
+    background-image: url("../../assets/images/train.jpg");
+    padding-top:100px;
+    background-size:cover;
+    
+}
+
+.container {
+    background-color: transparent;
+}

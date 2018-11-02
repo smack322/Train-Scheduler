@@ -61,6 +61,29 @@ console.log("connected!");
     var firstTrainTime = childSnapshot.val().firstTrainTime;
     var frequency = childSnapshot.val().frequency;
 
+    var firstTrainTime = moment(firstTrainTime, "HH:mm").subtract(1, "years");
+    console.log(firstTrainTime);
+
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    var trainFrequency = frequency;
+    console.log(trainFrequency);
+
+    var diffTime = moment().diff(moment(firstTrainTime), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    var tRemainder = diffTime % trainFrequency;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = trainFrequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
     console.log(trainName);
     console.log(destination);
     console.log(firstTrainTime);
@@ -70,8 +93,9 @@ console.log("connected!");
     var newRow = $("<tr>").append(
         $("<td>").text(trainName),
         $("<td>").text(destination),
-        $("<td>").text(firstTrainTime),
-        $("<td>").text(frequency)
+        $("<td>").text(frequency),
+        $("<td>").text(nextTrain),
+        $("<td>").text(tMinutesTillTrain)
       );
 
       $("#train-table > thead").append(newRow);
